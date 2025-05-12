@@ -124,6 +124,18 @@ public class workpolicyObj {
 
         @FindBy (xpath="//div[contains(text(),'Save & Continue')]")
         public static WebElement SaveContOvertime;
+
+//TIME OUT POLICY   
+        @FindBy (xpath="//h2[text()='Time In-Out Policy']")
+        public static WebElement TimeinoutOpt;
+
+        @FindBy (xpath="//h1[text()='Time In-Out Policy']")
+        public static WebElement TimeinouHead;
+
+        @FindBy (xpath="//input[@placeholder='Choose If Time Shortfall Exceeds']")
+        public static WebElement Shortfalexced;
+
         
-        
+
+                    
 }

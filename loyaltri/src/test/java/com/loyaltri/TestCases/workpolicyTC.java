@@ -7,9 +7,7 @@ import java.util.Date;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
-import org.checkerframework.checker.units.qual.min;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -227,7 +225,7 @@ public void overtime()throws Exception{
 	            test.pass("WorkPolicy page is displayed");
  
 	        } else {
-				test.fail("<font color='red'>MissPuchPOlicy page is not displayed</font>",MediaEntityBuilder.createScreenCaptureFromPath(takeScreenshot(driver,screenShot)).build());
+				test.fail("<font color='red'>WorkPolicy page  page is not displayed</font>",MediaEntityBuilder.createScreenCaptureFromPath(takeScreenshot(driver,screenShot)).build());
 	  
 	        }
  
@@ -325,6 +323,7 @@ test.info("<b><font color = 'purple'>Test case-5  Verify the Update Miss Puch Po
 			workpolicyObj.UnassignBtnMiss.click();
 			test.pass("Unassign button clicked successfully");
 			workpolicyObj.missSavebtn.click();
+			Thread.sleep(1000);
 			test.pass("Update the policy  successfully");
 			workpolicyObj.Proceedbtn.click();
 			test.pass("Proceed button clicked successfully");
@@ -356,15 +355,60 @@ test.info("<b><font color = 'purple'>Test case-6  Verify the Delete  functionali
 			Thread.sleep(1000);
 			test.pass("Deleted the misspunch policy  successfully");
 
-
-
-
-
-		
-
-
-
 }
+
+//Time In-Out Policy 
+
+		@Test(priority = 3)
+		public void timeout()throws Exception{
+			FileInputStream stream = new FileInputStream("Config.properties"); 
+			Properties properties = new Properties();
+			properties.load(stream);
+	         
+	 		test = reports.createTest("Testcase for Time In-Out Policy Page ");
+			PageFactory.initElements(driver,workpolicyObj.class);
+
+
+			workpolicyObj.settings.click();
+			test.pass("Settings Menu clicked");
+			workpolicyObj.workpolicy.click();
+			test.pass("workpolicy Menu Clicked");
+			String actCountry = workpolicyObj.WorkpolicyHead.getText();
+			if (actCountry.equals("WorkPolicy")) {
+					test.pass("WorkPolicy page is displayed");
+	 
+				} else {
+					test.fail("<font color='red'>WorkPolicy page  page is not displayed</font>",MediaEntityBuilder.createScreenCaptureFromPath(takeScreenshot(driver,screenShot)).build());
+		  
+				}
+
+				test.info("<b><font color = 'purple'>Test case-1 Check the Create Workpolicy page is displayed </b>");
+				workpolicyObj.CreateWorkPol.click();
+				test.pass("Creatework policy option clicked");
+				Thread.sleep(1000);
+				String Timeout = workpolicyObj.TimeinouHead.getText();
+				if (Timeout.equals("Time In-Out Policy")) {
+					test.pass("Over Time Policy page is displayed");
+			
+				} else {
+					test.fail("<font color='red'> Over Time Policy page is not displayed</font>",MediaEntityBuilder.createScreenCaptureFromPath(takeScreenshot(driver,screenShot)).build());
+				}
+				workpolicyObj.policyName.sendKeys(properties.getProperty("PolicyName"));
+				test.pass("Policyname entred successfully");
+				Thread.sleep(1000);
+				workpolicyObj.Shortfalexced.sendKeys(properties.getProperty("MissTime"));
+				test.pass("MissPuch value entred successfully");
+				Thread.sleep(1000);
+            
+
+
+
+
+		}
+
+
+
+
 	
 		@AfterSuite
 		public void reportflush() {
