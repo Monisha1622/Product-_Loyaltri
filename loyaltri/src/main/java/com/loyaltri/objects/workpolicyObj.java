@@ -129,13 +129,37 @@ public class workpolicyObj {
         @FindBy (xpath="//h2[text()='Time In-Out Policy']")
         public static WebElement TimeinoutOpt;
 
-        @FindBy (xpath="//h1[text()='Time In-Out Policy']")
+        @FindBy (xpath="//h2[text()='Time In-Out Policy']")
         public static WebElement TimeinouHead;
 
         @FindBy (xpath="//input[@placeholder='Choose If Time Shortfall Exceeds']")
         public static WebElement Shortfalexced;
 
-        
 
+        @FindBy (xpath="//input[@placeholder='Enter Amount']")
+        public static WebElement AmountTITO;
+
+
+        
+//Attendence In Off Days
+
+        @FindBy (xpath="//h2[text()='Attendance on Off days']")
+        public static WebElement AttendOffdaysOpt;
+        @FindBy (xpath="//h2[text()='Attendance on Off days']")
+        public static WebElement AttendOffdaysHead;
+
+        @FindBy (xpath="(//span[text()='Select'])[1]")
+        public static WebElement SalaryMultiplier;
+        @FindBy (xpath="//h1[text()='Consider attendance on week off as working day']")
+        public static WebElement SalaryComponent;
+
+        @FindBy (xpath="//div[@class='ant-select-item-option-content']")
+        public static List<WebElement> MultiplierDD;
+
+
+
+
+
+        
                     
 }

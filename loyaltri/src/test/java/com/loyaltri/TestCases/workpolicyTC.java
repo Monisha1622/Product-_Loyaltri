@@ -11,6 +11,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
@@ -299,7 +300,7 @@ Thread.sleep(2000);
 workpolicyObj.Proceedbtn.click();
 Thread.sleep(1000);
 
-test.info("<b><font color = 'purple'>Test case-5  Verify the Update Miss Puch Policy functionality  </b>");
+test.info("<b><font color = 'purple'>Test case-5  Verify the Update OverTime Policy functionality  </b>");
 	        workpolicyObj.DashSerch.sendKeys(properties.getProperty("OTpolicyName"));
 	        Thread.sleep(4000);
 	        if (workpolicyObj.DashSerch.getText().contains(properties.getProperty("OTpolicyName"))) {
@@ -364,11 +365,9 @@ test.info("<b><font color = 'purple'>Test case-6  Verify the Delete  functionali
 			FileInputStream stream = new FileInputStream("Config.properties"); 
 			Properties properties = new Properties();
 			properties.load(stream);
-	         
 	 		test = reports.createTest("Testcase for Time In-Out Policy Page ");
 			PageFactory.initElements(driver,workpolicyObj.class);
-
-
+			test.info("<b><font color = 'purple'>Test case-1 Verify the Time In Time Out Policy  page is displayed </b>");
 			workpolicyObj.settings.click();
 			test.pass("Settings Menu clicked");
 			workpolicyObj.workpolicy.click();
@@ -382,33 +381,212 @@ test.info("<b><font color = 'purple'>Test case-6  Verify the Delete  functionali
 		  
 				}
 
-				test.info("<b><font color = 'purple'>Test case-1 Check the Create Workpolicy page is displayed </b>");
+				test.info("<b><font color = 'purple'>Test case-2 Check the Create Workpolicy page is displayed </b>");
 				workpolicyObj.CreateWorkPol.click();
 				test.pass("Creatework policy option clicked");
 				Thread.sleep(1000);
 				String Timeout = workpolicyObj.TimeinouHead.getText();
 				if (Timeout.equals("Time In-Out Policy")) {
-					test.pass("Over Time Policy page is displayed");
+					test.pass("Time In-Out Policy page is displayed");
 			
 				} else {
-					test.fail("<font color='red'> Over Time Policy page is not displayed</font>",MediaEntityBuilder.createScreenCaptureFromPath(takeScreenshot(driver,screenShot)).build());
+					test.fail("<font color='red'> Time In-Out Policy page is not displayed</font>",MediaEntityBuilder.createScreenCaptureFromPath(takeScreenshot(driver,screenShot)).build());
 				}
-				workpolicyObj.policyName.sendKeys(properties.getProperty("PolicyName"));
+				workpolicyObj.TimeinouHead.click();
+				test.pass("Time In-Out Policy option is clicked Suceesfully");
+           	    workpolicyObj.policyName.sendKeys(properties.getProperty("TimeOutpolicyName"));
 				test.pass("Policyname entred successfully");
 				Thread.sleep(1000);
-				workpolicyObj.Shortfalexced.sendKeys(properties.getProperty("MissTime"));
-				test.pass("MissPuch value entred successfully");
+				workpolicyObj.Shortfalexced.sendKeys(properties.getProperty("shortfallTime"));
+				test.pass("Time entred successfully");
+				Thread.sleep(2000);
+				workpolicyObj.DuductionDD.click();
+				test.pass("Deduction DroprDown clicked successfully");
 				Thread.sleep(1000);
-            
+					
+	//Deduction Type dropdown
+		for (int i = 0; i < workpolicyObj.DeductionList.size(); i++) {
+			if (workpolicyObj.DeductionList.get(i).getText().equalsIgnoreCase(properties.getProperty("DeductionType1"))) {
+			workpolicyObj.DeductionList.get(i).click();
+			break;	  
+	}
+	}
+				test.pass("Deduction Type is selected successfully");
+				workpolicyObj.AmountTITO.sendKeys(properties.getProperty("amount"));
+				test.pass("Amount entred successfully");
+				workpolicyObj.SaveCont.click();
+				Thread.sleep(1000);
+				workpolicyObj.Proceedbtn.click();
+			    test.pass("Proceed button clicked successfully");
+			    Thread.sleep(2000);
+		
+						
+				test.info("<b><font color = 'purple'>Test case-3 Check the Assign Policy  page is displayed </b>");
+				if(workpolicyObj.assignHeadmiss.getText().equals("Assign Policy")) {
+				test.pass("Assign Policy  window is displayed.The heading is :"+workpolicyObj.assignHeadmiss.getText());
+				}else {
+				test.fail("<font color='red'>Assign policy page navigation failed</font>",MediaEntityBuilder.createScreenCaptureFromPath(takeScreenshot(driver,screenShot)).build());
+			  }
+	
+				workpolicyObj.EffDate.click(); 
+				test.pass("Effective date clicked successfully"); 
+				Thread.sleep(2000);
+				workpolicyObj.CalendrPrevBtn.click();
+				Thread.sleep(2000);
+
+				test.pass("Previous button clicked successfully");
+				workpolicyObj.EffDate.sendKeys(properties.getProperty("PreviousMonthDate"));
+				//search Empolyee
+workpolicyObj.SearchEmp.sendKeys(properties.getProperty("workSearch"));
+test.pass("Searching the empolyee  successfully");
+Thread.sleep(1000);
+  
+////check box		        
+if (!workpolicyObj.checkboxMiss.isSelected()) {
+workpolicyObj.checkboxMiss.click();
+test.pass("Checkbox clicked successfully");
+	}
+Thread.sleep(2000);
+workpolicyObj.missSavebtn.click();
+test.pass("Save & Continue button clicked successfully");
+Thread.sleep(2000);
+workpolicyObj.Proceedbtn.click();
+Thread.sleep(1000);
+
+test.info("<b><font color = 'purple'>Test case-4  Verify the Update Time In Time Out Policy functionality  </b>");
+	        workpolicyObj.DashSerch.sendKeys(properties.getProperty("TimeOutpolicyName"));
+	        Thread.sleep(4000);
+	        if (workpolicyObj.DashSerch.getText().contains(properties.getProperty("TimeOutpolicyName"))) {
+		    test.pass("Policy found successfully in the search results");
+        	} else {
+		    test.fail("<font color='red'>Policy not found in the search results</font>", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenshot(driver, screenShot)).build());
+	       }
+
+			workpolicyObj.MPeditBtn.click();
+			test.pass("Edit button clicked successfully");
+			Thread.sleep(1000);
+		
+			workpolicyObj.missSavebtn.click();
+			test.pass("Save & Continue button clicked successfully");
+			Thread.sleep(1000);
+			workpolicyObj.Proceedbtn.click();
+			Thread.sleep(1000);
+			// misspunchObj.EffDate.sendKeys(properties.getProperty("PreviousMonthDate"));
+        
+			Thread.sleep(1000);
+			workpolicyObj.UnassignBtnMiss.click();
+			test.pass("Unassign button clicked successfully");
+			workpolicyObj.missSavebtn.click();
+			test.pass("Update the policy  successfully");
+			workpolicyObj.Proceedbtn.click();
+			test.pass("Proceed button clicked successfully");
+			Thread.sleep(1000);
+		
+
+//DELETE 
+test.info("<b><font color = 'purple'>Test case-5  Verify the Delete  functionality  Miss Puch Policy </b>");
+           workpolicyObj.DashSerch.sendKeys(properties.getProperty("TimeOutpolicyName"));
+           Thread.sleep(4000);
+        if (workpolicyObj.DashSerch.getText().contains(properties.getProperty("PolicyName"))) {
+           test.pass("Policy found successfully in the search results");
+           } else {
+        test.fail("<font color='red'>Policy not found in the search results</font>", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenshot(driver, screenShot)).build());
+}
+			workpolicyObj.DeletBtnmis.click();
+			test.pass("Delete button clicked successfully");
+			Thread.sleep(1000);
+			workpolicyObj.NObtnMis.click();
+			test.pass("No button clicked successfully");
+			Thread.sleep(1000);
+			workpolicyObj.DashSerch.sendKeys(properties.getProperty("TimeOutpolicyName"));
+			Thread.sleep(4000);
+			workpolicyObj.DeletBtnmis.click();
+			workpolicyObj.ConfirmBtnMis.click();
+			test.pass("Confirm button clicked successfully");
+			Thread.sleep(1000);
+			test.pass("Deleted the misspunch policy  successfully");
+  
+}
+	        
+   
+		@Test(priority = 4)
+		public void Offdays()throws Exception{
+			FileInputStream stream = new FileInputStream("Config.properties"); 
+			Properties properties = new Properties();
+			properties.load(stream);
+	 		test = reports.createTest("Testcase for Attendance on Off days Page ");
+			PageFactory.initElements(driver,workpolicyObj.class);
+			test.info("<b><font color = 'purple'>Test case-1 Verify the Attendance on Off days  page is displayed </b>");
+			workpolicyObj.settings.click();
+			test.pass("Settings Menu clicked");
+			workpolicyObj.workpolicy.click();
+			test.pass("workpolicy Menu Clicked");
+			String actCountry = workpolicyObj.WorkpolicyHead.getText();
+			if (actCountry.equals("WorkPolicy")) {
+					test.pass("WorkPolicy page is displayed");
+	 
+				} else {
+					test.fail("<font color='red'>WorkPolicy page  page is not displayed</font>",MediaEntityBuilder.createScreenCaptureFromPath(takeScreenshot(driver,screenShot)).build());
+		  
+				}  
+				
+				test.info("<b><font color = 'purple'>Test case-2 Check the Create Workpolicy page is displayed </b>");
+				workpolicyObj.CreateWorkPol.click();
+				test.pass("Creatework policy option clicked");
+				Thread.sleep(1000);
+				String Timeout = workpolicyObj.AttendOffdaysHead.getText();
+				if (Timeout.equals("Attendance on Off days")) {
+					test.pass("Attendance on Off days page is displayed");
+			
+				} else {
+					test.fail("<font color='red'>Attendance on Off days page is not displayed</font>",MediaEntityBuilder.createScreenCaptureFromPath(takeScreenshot(driver,screenShot)).build());
+				}
+				workpolicyObj.AttendOffdaysHead.click();
+				Thread.sleep(1000);
+				workpolicyObj.policyName.sendKeys(properties.getProperty("Offdaypolicy"));
+				test.pass("Policyname entred successfully");
+				Thread.sleep(2000);
+
+        // Use JavaScript to click if needed
+
+
+       // JavascriptExecutor js1 = (JavascriptExecutor) driver;  
+        //js1.executeScript("arguments[0].click();", workpolicyObj.instantmessages);
+
+		 Actions actions1 = new Actions(driver);
+         actions1.moveToElement(workpolicyObj.SalaryComponent).perform();
+         Thread.sleep(2000); // Optional wait after scroll
+
+		workpolicyObj.SalaryMultiplier.click();
+		test.pass("Salary Multiplier option clicked successfully");
+		Thread.sleep(2000);
+		for (int i = 0; i < workpolicyObj.MultiplierDD.size(); i++) {
+			if (workpolicyObj.DeductionList.get(i).getText().equalsIgnoreCase(properties.getProperty("SalaryMultiplier"))) {
+			workpolicyObj.DeductionList.get(i).click();
+			break;	  
+	}
+	}
+	Thread.sleep(2000);
+
+	
+
+
+		// Actions actions1 = new Actions(driver);
+        // actions1.moveToElement(workpolicyObj.SalaryComponent).perform();
+        // Thread.sleep(2000); // Optional wait after scroll
+       
 
 
 
 
-		}
 
 
 
 
+		
+
+
+			}
 	
 		@AfterSuite
 		public void reportflush() {
