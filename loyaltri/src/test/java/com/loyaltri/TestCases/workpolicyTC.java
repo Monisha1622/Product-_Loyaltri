@@ -567,13 +567,22 @@ test.info("<b><font color = 'purple'>Test case-5  Verify the Delete  functionali
 	}
 	}
 	Thread.sleep(2000);
+	workpolicyObj.ComponentOpt.click();
+	test.pass("Salary Component option clicked successfully");
+	Thread.sleep(2000);
+
+	for (int i = 0; i < workpolicyObj.ComponentDD.size(); i++) {
+		if (workpolicyObj.ComponentDD.get(i).getText().equalsIgnoreCase(properties.getProperty("SalaryComponent"))) {
+		workpolicyObj.ComponentDD.get(i).click();
+		break;	  
+}
+}
+
 
 	
 
 
-		// Actions actions1 = new Actions(driver);
-        // actions1.moveToElement(workpolicyObj.SalaryComponent).perform();
-        // Thread.sleep(2000); // Optional wait after scroll
+		
        
 
 
