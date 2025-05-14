@@ -7,10 +7,12 @@ import java.util.Date;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterSuite;
@@ -420,7 +422,7 @@ test.info("<b><font color = 'purple'>Test case-6  Verify the Delete  functionali
 			    test.pass("Proceed button clicked successfully");
 			    Thread.sleep(2000);
 		
-						
+//ASSIGN TITO POLICY						
 				test.info("<b><font color = 'purple'>Test case-3 Check the Assign Policy  page is displayed </b>");
 				if(workpolicyObj.assignHeadmiss.getText().equals("Assign Policy")) {
 				test.pass("Assign Policy  window is displayed.The heading is :"+workpolicyObj.assignHeadmiss.getText());
@@ -453,6 +455,8 @@ Thread.sleep(2000);
 workpolicyObj.Proceedbtn.click();
 Thread.sleep(1000);
 
+
+//UPDATE POLICY
 test.info("<b><font color = 'purple'>Test case-4  Verify the Update Time In Time Out Policy functionality  </b>");
 	        workpolicyObj.DashSerch.sendKeys(properties.getProperty("TimeOutpolicyName"));
 	        Thread.sleep(4000);
@@ -508,7 +512,7 @@ test.info("<b><font color = 'purple'>Test case-5  Verify the Delete  functionali
   
 }
 	        
-   
+//Attedence on Off days Policy   
 		@Test(priority = 4)
 		public void Offdays()throws Exception{
 			FileInputStream stream = new FileInputStream("Config.properties"); 
@@ -547,11 +551,7 @@ test.info("<b><font color = 'purple'>Test case-5  Verify the Delete  functionali
 				test.pass("Policyname entred successfully");
 				Thread.sleep(2000);
 
-        // Use JavaScript to click if needed
 
-
-       // JavascriptExecutor js1 = (JavascriptExecutor) driver;  
-        //js1.executeScript("arguments[0].click();", workpolicyObj.instantmessages);
 
 		 Actions actions1 = new Actions(driver);
          actions1.moveToElement(workpolicyObj.SalaryComponent).perform();
@@ -574,13 +574,116 @@ test.info("<b><font color = 'purple'>Test case-5  Verify the Delete  functionali
 	for (int i = 0; i < workpolicyObj.ComponentDD.size(); i++) {
 		if (workpolicyObj.ComponentDD.get(i).getText().equalsIgnoreCase(properties.getProperty("SalaryComponent"))) {
 		workpolicyObj.ComponentDD.get(i).click();
-		break;	  
+		break;
+		
 }
 }
+//select options one by one
+WebElement[] weekOffOptions = {
+    
+    workpolicyObj.CompoOffOpt,
+    workpolicyObj.OvertimeOpt,
+    workpolicyObj.DontConsiderOpt,
+};
 
-
+// Loop through and click each option one by one
+for (WebElement option : weekOffOptions) {
+    option.click();
+    Thread.sleep(2000); // Small pause to simulate user behavior or allow UI to update
+}
+workpolicyObj.SaveCont.click();
+test.pass("Save & Continue button clicked successfully");
+Thread.sleep(1000);
+workpolicyObj.Proceedbtn.click();
+Thread.sleep(1000);
 	
+//ASSIGN AOH POLICY
 
+test.info("<b><font color = 'purple'>Test case-3 Check the Assign AOH Policy  page is displayed </b>");
+   if(workpolicyObj.assignHeadmiss.getText().equals("Assign Policy")) {
+   test.pass("Assign Policy  window is displayed.The heading is :"+workpolicyObj.assignHeadmiss.getText());
+   }else {
+   test.fail("<font color='red'>Assign policy page navigation failed</font>",MediaEntityBuilder.createScreenCaptureFromPath(takeScreenshot(driver,screenShot)).build());
+}
+
+workpolicyObj.EffDate.click(); 
+test.pass("Effective date clicked successfully"); 
+Thread.sleep(2000);
+workpolicyObj.CalendrPrevBtn.click();
+test.pass("Previous button clicked successfully");
+workpolicyObj.EffDate.sendKeys(properties.getProperty("PreviousMonthDate"));
+
+//search Empolyee
+workpolicyObj.SearchEmp.sendKeys(properties.getProperty("workSearch"));
+test.pass("Send the value successfully");
+Thread.sleep(1000);
+  
+////check box		        
+if (!workpolicyObj.checkboxMiss.isSelected()) {
+workpolicyObj.checkboxMiss.click();
+test.pass("Checkbox clicked successfully");
+	}
+Thread.sleep(2000);
+workpolicyObj.missSavebtn.click();
+test.pass("Save & Continue button clicked successfully");
+Thread.sleep(2000);
+workpolicyObj.Proceedbtn.click();
+Thread.sleep(1000);
+
+test.info("<b><font color = 'purple'>Test case-4  Verify the Update Time In Time Out Policy functionality  </b>");
+	        workpolicyObj.DashSerch.sendKeys(properties.getProperty("TimeOutpolicyName"));
+	        Thread.sleep(4000);
+	        if (workpolicyObj.DashSerch.getText().contains(properties.getProperty("TimeOutpolicyName"))) {
+		    test.pass("Policy found successfully in the search results");
+        	} else {
+		    test.fail("<font color='red'>Policy not found in the search results</font>", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenshot(driver, screenShot)).build());
+	       }
+
+
+			workpolicyObj.MPeditBtn.click();
+			test.pass("Edit button clicked successfully");
+			Thread.sleep(1000);
+		
+			workpolicyObj.missSavebtn.click();
+			test.pass("Save & Continue button clicked successfully");
+			Thread.sleep(1000);
+			workpolicyObj.Proceedbtn.click();
+			Thread.sleep(1000);
+			// misspunchObj.EffDate.sendKeys(properties.getProperty("PreviousMonthDate"));
+        
+			Thread.sleep(1000);
+			workpolicyObj.UnassignBtnMiss.click();
+			test.pass("Unassign button clicked successfully");
+			workpolicyObj.missSavebtn.click();
+			test.pass("Update the policy  successfully");
+			workpolicyObj.Proceedbtn.click();
+			test.pass("Proceed button clicked successfully");
+			Thread.sleep(1000);
+		
+
+//DELETE 
+test.info("<b><font color = 'purple'>Test case-5  Verify the Delete  functionality  Miss Puch Policy </b>");
+           workpolicyObj.DashSerch.sendKeys(properties.getProperty("TimeOutpolicyName"));
+           Thread.sleep(4000);
+        if (workpolicyObj.DashSerch.getText().contains(properties.getProperty("PolicyName"))) {
+           test.pass("Policy found successfully in the search results");
+           } else {
+        test.fail("<font color='red'>Policy not found in the search results</font>", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenshot(driver, screenShot)).build());
+}
+			workpolicyObj.DeletBtnmis.click();
+			test.pass("Delete button clicked successfully");
+			Thread.sleep(1000);
+			workpolicyObj.NObtnMis.click();
+			test.pass("No button clicked successfully");
+			Thread.sleep(1000);
+			workpolicyObj.DashSerch.sendKeys(properties.getProperty("TimeOutpolicyName"));
+			Thread.sleep(4000);
+			workpolicyObj.DeletBtnmis.click();
+			workpolicyObj.ConfirmBtnMis.click();
+			test.pass("Confirm button clicked successfully");
+			Thread.sleep(1000);
+			test.pass("Deleted the misspunch policy  successfully");
+  
 
 		
        

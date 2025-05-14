@@ -156,12 +156,21 @@ public class workpolicyObj {
         @FindBy (xpath="//div[@class='ant-select-item-option-content']")
         public static List<WebElement> MultiplierDD;
 
-        @FindBy (xpath="(//span[@title='Select'])[2]")
+        @FindBy (xpath="(//span[@title='Select'])[1]")
         public static WebElement ComponentOpt;
 
         @FindBy (xpath="//div[@class='ant-select-item-option-content']")
         public static  List<WebElement> ComponentDD;
 
+        @FindBy (xpath="(//h3[text()='Comp Off'])[2]")
+        public static  WebElement CompoOffOpt;
+
+        @FindBy (xpath="(//h3[text()='Overtime'])[2]")
+        public static WebElement OvertimeOpt;
+
+
+        @FindBy (xpath="(//h3[@class=' text-sm font-semibold'])[8]")
+        public static WebElement DontConsiderOpt;
 
 
 
