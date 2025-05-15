@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -67,8 +66,36 @@ public class workpolicyTC  extends commonfunctions{
 				test.fail("<font color='red'>MissPuchPOlicy page is not displayed</font>",MediaEntityBuilder.createScreenCaptureFromPath(takeScreenshot(driver,screenShot)).build());
 	  
 	        }
- 
+			Thread.sleep(3000);
+
+//DASHBOARD PAGE		
+			test.info("<b><font color = 'purple'>Test case-2 Check the  Dashboard page is displayed </b>");
+			workpolicyObj.Option1.click();
+			test.pass("Option1 clicked successfully");
+			Thread.sleep(1000);
+
 		
+
+			 workpolicyObj.selectOpt.click();
+			 test.pass("select button clicked successfully");
+
+
+			for (int i = 0; i < workpolicyObj.DashDD.size(); i++) {
+				if (workpolicyObj.DashDD.get(i).getText().equalsIgnoreCase(properties.getProperty("WorkPolicyName"))) {
+				workpolicyObj.DashDD.get(i).click();
+				break;	  
+		}
+		}
+			    workpolicyObj.AssignOption.get(0).click();    
+				test.pass("Assign option clicked successfully");   
+				Thread.sleep(2000);
+				workpolicyObj.CloseOption.get(0).click();
+				test.pass("Close option clicked successfully");  
+				Thread.sleep(2000);                                                                                                                                                                                                                                 
+
+			
+
+
 	test.info("<b><font color = 'purple'>Test case-2 Check the Create Workpolicy page is displayed </b>");
         workpolicyObj.CreateWorkPol.click();
 		test.pass("Creatework policy option clicked");
@@ -179,7 +206,15 @@ test.info("<b><font color = 'purple'>Test case-5  Verify the Update Miss Puch Po
 			workpolicyObj.Proceedbtn.click();
 			test.pass("Proceed button clicked successfully");
 			Thread.sleep(1000);
+
 		
+    
+
+
+
+
+
+
 
 //DELETE 
 test.info("<b><font color = 'purple'>Test case-6  Verify the Delete  functionality  Miss Puch Policy </b>");
@@ -684,9 +719,9 @@ test.info("<b><font color = 'purple'>Test case-5  Verify the Delete  functionali
 			Thread.sleep(1000);
 			test.pass("Deleted the misspunch policy  successfully");
   
-
-		
-       
+ 		
+//DAshborad  
+// Loop through and click each option one by one, then close and proceed to the next
 
 
 

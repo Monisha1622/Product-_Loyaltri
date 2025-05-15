@@ -4,6 +4,29 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 public class workpolicyObj {
 
+//Dashboard
+
+@FindBy (xpath="//div[text()='Select']")
+public static WebElement selectDD;
+
+@FindBy (xpath="//span[text()='Select']")
+public static WebElement selectOpt;
+
+@FindBy (xpath="//div[@class='ant-select-item-option-content']")
+public static List<WebElement> DashDD;
+
+
+@FindBy (xpath="//span[text()='Assign']")
+public static List<WebElement> AssignOption;
+
+
+
+@FindBy (xpath="//button[@class='ant-modal-close']")
+public static List<WebElement> CloseOption;
+
+
+
+
 //misspunch policy
     
         @FindBy (xpath="//p[contains(text(),'Settings')]")
@@ -172,8 +195,15 @@ public class workpolicyObj {
         @FindBy (xpath="(//h3[@class=' text-sm font-semibold'])[8]")
         public static WebElement DontConsiderOpt;
 
+//Dashboard Meanu
+
+@FindBy (xpath="//p[text()='Overtime Policy']")
+public static WebElement Option1;
 
 
+
+@FindBy (xpath="//span[@class='anticon anticon-close ant-modal-close-icon']")
+public static WebElement Closebtn;
 
 
 
