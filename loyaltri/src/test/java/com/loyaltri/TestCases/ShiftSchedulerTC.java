@@ -7,12 +7,9 @@ import java.util.Date;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
@@ -20,7 +17,6 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.github.javafaker.Faker;
 import com.loyaltri.objects.ShiftSchedulerObj;
@@ -67,31 +63,79 @@ public class ShiftSchedulerTC extends commonfunctions {
 	test.pass("Shfit Schedular option is clicked");
 	Thread.sleep(2000);
 
-	// ShiftSchedulerObj.StartDate.click();
+	// ShiftSchedulerObj.StartDateOpt.click();
 	// test.pass("Deduction DroprDown clicked successfully");
 	// Thread.sleep(2000);
-	ShiftSchedulerObj.StartDate.sendKeys(properties.getProperty("StartDate"));
-	test.pass("Start Date is entered successfully");
-	Thread.sleep(2000);
 
-	ShiftSchedulerObj.EndDate.sendKeys(properties.getProperty("EndDate"));
-	test.pass("End Date is entered successfully");
-	Thread.sleep(2000);
-	ShiftSchedulerObj.ShiftScheOpt.click();
-	test.pass("Shift Schedular Header is clicked successfully");
-	Thread.sleep(2000);
-	for (int i = 0; i < ShiftSchedulerObj.ShiftScheHeDrop.size(); i++) {
-		if (ShiftSchedulerObj.ShiftScheHeDrop.get(i).getText().equalsIgnoreCase(properties.getProperty("DeductionType1"))) {
-			ShiftSchedulerObj.ShiftScheHeDrop.get(i).click();
+	// ShiftSchedulerObj.EndDate.click();
+	// test.pass("End Date is entered successfully");
+	// Thread.sleep(3000);
+
+	ShiftSchedulerObj.shiftSchemeOpt.click();
+	Thread.sleep(1000);
+	for (int i = 0; i < ShiftSchedulerObj.shiftSchemeDD.size(); i++) {
+		if (ShiftSchedulerObj.shiftSchemeDD.get(i).getText().equalsIgnoreCase(properties.getProperty("ShiftName"))) {
+		ShiftSchedulerObj.shiftSchemeDD.get(i).click();
 		break;	  
 }
 }
+	test.pass("Selected Shift Scheme: " + properties.getProperty("ShiftName"));
+	// Select Department
+	ShiftSchedulerObj.departmentOpt.click();
+	test.pass("Department DropDown clicked successfully");
+	Thread.sleep(1000); 
 
+	for (int i = 0; i < ShiftSchedulerObj.departmentDD.size(); i++) {
+		if (ShiftSchedulerObj.departmentDD.get(i).getText().equalsIgnoreCase(properties.getProperty("DepartmentName"))) {
+		ShiftSchedulerObj.departmentDD.get(i).click();
+		break;	  
+}
+
+}test.pass("Selected Department: " + properties.getProperty("DepartmentName"));
+	Thread.sleep(1000);
+	
+	test.info("<b><font color = 'purple'>Test case-3 Check the Assign Policy Functionality </b>");
+	ShiftSchedulerObj.addShiftButton.get(0).click();
+	test.pass("Clicked on Add Shift (+)");
+	Thread.sleep(2000);
+
+	ShiftSchedulerObj.morningShiftDD.get(0).click();
+	test.pass("Selected Morning Shift");
+	Thread.sleep(2000);
+	ShiftSchedulerObj.addShiftButton.get(0).click();
+	ShiftSchedulerObj.offDaysOption.click();
+	test.pass("Selected Off Day");
+	Thread.sleep(2000);
+	ShiftSchedulerObj.deleteButton.click();
+	test.pass("Clicked on Delete Shift");
+	Thread.sleep(2000);
+
+
+	
+
+
+ 
+
+ 
+       
+
+	// test.pass("Clicked on Add Shift (+)");
+	 Thread.sleep(2000);
+
+
+	 
+	// test.pass("Selected Morning Shift");
+	// ShiftSchedulerObj.deleteButton.click();
+	// Thread.sleep(2000);
+}
+	
+
+	
 
 
 
 		
-    }
+    
 
 
 
