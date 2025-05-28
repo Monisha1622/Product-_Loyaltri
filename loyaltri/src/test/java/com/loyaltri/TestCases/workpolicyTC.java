@@ -159,7 +159,7 @@ public class workpolicyTC  extends commonfunctions{
 			workpolicyObj.EffDate.sendKeys(properties.getProperty("PreviousMonthDate"));
 
 //search Empolyee
-	        workpolicyObj.SearchEmp.sendKeys(properties.getProperty("workSearch"));
+	        workpolicyObj.SearchEmp.sendKeys(properties.getProperty("EmpoName"));
             test.pass("Send the value successfully");
 	        Thread.sleep(1000);
               
@@ -321,7 +321,7 @@ test.pass("Previous button clicked successfully");
 workpolicyObj.EffDate.sendKeys(properties.getProperty("PreviousMonthDate"));
 
 //search Empolyee
-workpolicyObj.SearchEmp.sendKeys(properties.getProperty("workSearch"));
+workpolicyObj.SearchEmp.sendKeys(properties.getProperty("EmpoName"));
 test.pass("Send the value successfully");
 Thread.sleep(1000);
   
@@ -474,7 +474,7 @@ test.info("<b><font color = 'purple'>Test case-6  Verify the Delete  functionali
 				test.pass("Previous button clicked successfully");
 				workpolicyObj.EffDate.sendKeys(properties.getProperty("PreviousMonthDate"));
 				//search Empolyee
-workpolicyObj.SearchEmp.sendKeys(properties.getProperty("workSearch"));
+workpolicyObj.SearchEmp.sendKeys(properties.getProperty("EmpoName"));
 test.pass("Searching the empolyee  successfully");
 Thread.sleep(1000);
   
@@ -649,7 +649,7 @@ test.pass("Previous button clicked successfully");
 workpolicyObj.EffDate.sendKeys(properties.getProperty("PreviousMonthDate"));
 
 //search Empolyee
-workpolicyObj.SearchEmp.sendKeys(properties.getProperty("workSearch"));
+workpolicyObj.SearchEmp.sendKeys(properties.getProperty("EmpoName"));
 test.pass("Send the value successfully");
 Thread.sleep(1000);
   
